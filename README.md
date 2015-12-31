@@ -1,2 +1,4 @@
-# lms
-Lead Management System - a MIS for college project 
+# Lead Management System
+A MIS for college project
+
+Used PHP framework - [Mini](https://github.com/panique/mini)
