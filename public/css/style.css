@@ -2,16 +2,23 @@ body {
     font-family: Arial;
     font-size: 14px;
 }
-.logo {
-    font-size: 100px;
+.header {
+    font-size: 4em;
     font-weight: bolder;
-    letter-spacing: -6px;
+    letter-spacing: -3px;
     color: #222;
-    margin: 20px 30px;
+    text-align: center;
+    /*margin: 20px 30px;*/
 }
-.logo .number {
+/*.header .number, .footer {
     color: #222;
     opacity: 0.1;
+}*/
+.footer {
+  /*border-top:;*/
+  font-size: 1em;
+  color: #222;
+  text-align: center;
 }
 .navigation {
     margin-left: 33px;
@@ -77,4 +84,13 @@ body {
 .container button:hover {
     background-color: #222;
     color: #fff;
+}
+
+
+/* add page */
+.mini-container ul {
+
+}
+.mini-container ul li {
+  display: inline;
 }

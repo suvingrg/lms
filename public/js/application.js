@@ -37,3 +37,10 @@ $(function() {
     }
 
 });
+
+var addmore = document.getElementById('addmore');
+
+addmore.onclick = function() {
+  var newrow = '<tr><td><input type=\"text\" name=\"lname\" required /></td><td><input type=\"text\" name=\"address\" required /></td><td><input type=\"text\" name=\"contact\" required /></td><td><select name="status"><option value=\"\">Active</option><option value=\"\">Expired</option><option value=\"\">Postponed</option><option value=\"\">Dismissed</option></select></td><td><input type=\"text\" name=\"next_followup\" required /></td></tr>';
+  document.getElementById('records').innerHTML += newrow;
+};
