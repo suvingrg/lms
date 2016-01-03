@@ -25,13 +25,27 @@ class Leads extends Controller
 
     public function add() {
 
+      $leads = $this->model->getAllLeads();
+
       require APP . 'view/_templates/header.php';
       require APP . 'view/_templates/sidebar.php';
       require APP . 'view/leads/add.php';
       require APP . 'view/_templates/footer.php';
     }
 
+    public function addLead()
+    {
+        if (isset($_POST["submit_add_lead"])) {
+            // do addLead() in model/model.php
+            $this->model->addLead($_POST["name"], $_POST["address"], $_POST["contact"], $_POST["nextfollowup"]);
+        }
+
+        header('location: ' . URL . 'leads/view');
+    }
+
     public function view() {
+
+      $leads = $this->model->getAllLeads();
 
       require APP . 'view/_templates/header.php';
       require APP . 'view/_templates/sidebar.php';
@@ -39,14 +53,37 @@ class Leads extends Controller
       require APP . 'view/_templates/footer.php';
     }
 
-    public function update() {
+    public function update($l_id)
+    {
+        // if we have an id of a song that should be edited
+        if (isset($l_id)) {
+            // do getSong() in model/model.php
+            $lead = $this->model->getLead($l_id);
 
-      require APP . 'view/_templates/header.php';
-      require APP . 'view/_templates/sidebar.php';
-      require APP . 'view/leads/update.php';
-      require APP . 'view/_templates/footer.php';
+            // in a real application we would also check if this db entry exists and therefore show the result or
+            // redirect the user to an error page or similar
+
+            // load views. within the views we can echo out $song easily
+            require APP . 'view/_templates/header.php';
+            require APP . 'view/_templates/sidebar.php';
+            require APP . 'view/leads/update.php';
+            require APP . 'view/_templates/footer.php';
+        } else {
+            // redirect user to songs index page (as we don't have a song_id)
+            header('location: ' . URL . 'leads/view');
+        }
     }
 
-    
+    public function updateLead()
+    {
+        // if we have POST data to create a new song entry
+        if (isset($_POST["submit_update_lead"])) {
+            // do updateSong() from model/model.php
+            $this->model->updateLead($_POST["l_name"], $_POST["address"], $_POST["contact"], $_POST["next_followup"]);
+        }
+
+        // where to go after song has been added
+        header('location: ' . URL . 'leads/view');
+    }
 
 }

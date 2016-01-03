@@ -92,7 +92,7 @@ class Songs extends Controller
             header('location: ' . URL . 'songs/index');
         }
     }
-    
+
     /**
      * ACTION: updateSong
      * This method handles what happens when you move to http://yourproject/songs/updatesong

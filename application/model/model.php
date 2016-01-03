@@ -17,9 +17,9 @@ class Model
     /**
      * Get all songs from database
      */
-    public function getAllSongs()
+    public function getAllLeads()
     {
-        $sql = "SELECT id, artist, track, link FROM song";
+        $sql = "SELECT * FROM lead";
         $query = $this->db->prepare($sql);
         $query->execute();
 
@@ -41,52 +41,16 @@ class Model
      * @param string $track Track
      * @param string $link Link
      */
-    public function addSong($artist, $track, $link)
+    public function addLead($l_name, $address, $contact, $next_followup)
     {
-        $sql = "INSERT INTO song (artist, track, link) VALUES (:artist, :track, :link)";
+        $sql = "INSERT INTO lead (l_name, address, contact, next_followup) VALUES (:l_name, :address, :contact, :next_followup)";
         $query = $this->db->prepare($sql);
-        $parameters = array(':artist' => $artist, ':track' => $track, ':link' => $link);
+        $parameters = array(':l_name' => $l_name, ':address' => $address, ':contact' => $contact, ':next_followup' => $next_followup);
 
         // useful for debugging: you can see the SQL behind above construction by using:
         // echo '[ PDO DEBUG ]: ' . Helper::debugPDO($sql, $parameters);  exit();
 
         $query->execute($parameters);
-    }
-
-    /**
-     * Delete a song in the database
-     * Please note: this is just an example! In a real application you would not simply let everybody
-     * add/update/delete stuff!
-     * @param int $song_id Id of song
-     */
-    public function deleteSong($song_id)
-    {
-        $sql = "DELETE FROM song WHERE id = :song_id";
-        $query = $this->db->prepare($sql);
-        $parameters = array(':song_id' => $song_id);
-
-        // useful for debugging: you can see the SQL behind above construction by using:
-        // echo '[ PDO DEBUG ]: ' . Helper::debugPDO($sql, $parameters);  exit();
-
-        $query->execute($parameters);
-    }
-
-    /**
-     * Get a song from database
-     */
-    public function getSong($song_id)
-    {
-        $sql = "SELECT id, artist, track, link FROM song WHERE id = :song_id LIMIT 1";
-        $query = $this->db->prepare($sql);
-        $parameters = array(':song_id' => $song_id);
-
-        // useful for debugging: you can see the SQL behind above construction by using:
-        // echo '[ PDO DEBUG ]: ' . Helper::debugPDO($sql, $parameters);  exit();
-
-        $query->execute($parameters);
-
-        // fetch() is the PDO method that get exactly one result
-        return $query->fetch();
     }
 
     /**
@@ -101,29 +65,45 @@ class Model
      * @param string $link Link
      * @param int $song_id Id
      */
-    public function updateSong($artist, $track, $link, $song_id)
+    public function updateLead($l_id, $l_name, $address, $contact, $next_followup)
     {
-        $sql = "UPDATE song SET artist = :artist, track = :track, link = :link WHERE id = :song_id";
+        $sql = "UPDATE lead SET l_id = :l_id, l_name = :l_name, address = :address, contact = :contact, next_followup = :next_followup WHERE l_id = :l_id";
         $query = $this->db->prepare($sql);
-        $parameters = array(':artist' => $artist, ':track' => $track, ':link' => $link, ':song_id' => $song_id);
+        $parameters = array(':l_id' => $l_id, ':l_name' => $l_name, ':address' => $address, ':contact' => $contact, ':next_followup' => $next_followup);
 
         // useful for debugging: you can see the SQL behind above construction by using:
         // echo '[ PDO DEBUG ]: ' . Helper::debugPDO($sql, $parameters);  exit();
 
         $query->execute($parameters);
     }
-
     /**
-     * Get simple "stats". This is just a simple demo to show
-     * how to use more than one model in a controller (see application/controller/songs.php for more)
+     * Get a song from database
      */
-    public function getAmountOfSongs()
+    public function getLead($l_id)
     {
-        $sql = "SELECT COUNT(id) AS amount_of_songs FROM song";
+        $sql = "SELECT * FROM lead WHERE l_id = :l_id LIMIT 1";
         $query = $this->db->prepare($sql);
-        $query->execute();
+        $parameters = array(':l_id' => $l_id);
+
+        // useful for debugging: you can see the SQL behind above construction by using:
+        // echo '[ PDO DEBUG ]: ' . Helper::debugPDO($sql, $parameters);  exit();
+
+        $query->execute($parameters);
 
         // fetch() is the PDO method that get exactly one result
-        return $query->fetch()->amount_of_songs;
+        return $query->fetch();
     }
+
+    public function addFollowup($l_id, $c_id)
+    {
+      $sql = "INSERT INTO followup (c_id, l_id, f_date, feedback, next_followup) VALUES (:c_id, :l_id, :f_date, :feedback, :next_followup)";
+      $query = $this->db->prepare($sql);
+      $parameters = array(':l_name' => $l_name, ':address' => $address, ':contact' => $contact, ':next_followup' => $next_followup);
+
+      // useful for debugging: you can see the SQL behind above construction by using:
+      // echo '[ PDO DEBUG ]: ' . Helper::debugPDO($sql, $parameters);  exit();
+
+      $query->execute($parameters);
+    }
+
 }
