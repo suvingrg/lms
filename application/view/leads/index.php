@@ -5,6 +5,7 @@
       <li><a href="<?php echo URL; ?>leads/add">Add Leads</a></li>
       <li><a href="<?php echo URL; ?>leads/view">View / Update Leads</a></li>
       <li><a href="<?php echo URL; ?>followup/index">Follow Up Lead</a></li>
+      <li><a href="<?php echo URL; ?>followup/view">View Follow Ups</a></li>
     </ul>
   </div>
 

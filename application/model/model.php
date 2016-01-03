@@ -94,16 +94,29 @@ class Model
         return $query->fetch();
     }
 
-    public function addFollowup($l_id, $c_id)
+    public function addFollowup($l_id, $status, $feedback, $next_followup, $c_id)
     {
-      $sql = "INSERT INTO followup (c_id, l_id, f_date, feedback, next_followup) VALUES (:c_id, :l_id, :f_date, :feedback, :next_followup)";
+      $sql = "INSERT INTO followup (c_id, l_id, status, feedback, next_followup) VALUES (:c_id, :l_id, :status, :feedback, :next_followup)";
       $query = $this->db->prepare($sql);
-      $parameters = array(':l_name' => $l_name, ':address' => $address, ':contact' => $contact, ':next_followup' => $next_followup);
+      $parameters = array(':c_id' => $c_id, ':l_id' => $l_id, ':status' => $status, ':feedback' => $feedback, ':next_followup' => $next_followup);
 
       // useful for debugging: you can see the SQL behind above construction by using:
       // echo '[ PDO DEBUG ]: ' . Helper::debugPDO($sql, $parameters);  exit();
 
       $query->execute($parameters);
+    }
+
+    public function getAllFollowups()
+    {
+        $sql = "SELECT * FROM followup";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+
+        // fetchAll() is the PDO method that gets all result rows, here in object-style because we defined this in
+        // core/controller.php! If you prefer to get an associative array as the result, then do
+        // $query->fetchAll(PDO::FETCH_ASSOC); or change core/controller.php's PDO options to
+        // $options = array(PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC ...
+        return $query->fetchAll();
     }
 
 }

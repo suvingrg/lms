@@ -23,4 +23,23 @@ class Followup extends Controller
         require APP . 'view/_templates/footer.php';
     }
 
+    public function addfollowup($c_id)
+    {
+      if (isset($_POST["submit_followup"])) {
+
+          $this->model->addFollowup($_POST['l_id'], $_POST["status"], $_POST["feedback"], $_POST["next_followup"], $_POST["c_id"]);
+      }
+
+      header('location: ' . URL . 'leads/index');
+    }
+
+    public function view() {
+
+      $followups = $this->model->getAllFollowups();
+
+      require APP . 'view/_templates/header.php';
+      require APP . 'view/_templates/sidebar.php';
+      require APP . 'view/followup/view.php';
+      require APP . 'view/_templates/footer.php';
+    }
 }
