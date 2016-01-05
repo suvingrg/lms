@@ -41,14 +41,16 @@ class Model
      * @param string $track Track
      * @param string $link Link
      */
+
     public function addLead($l_name, $address, $contact, $next_followup)
     {
         $sql = "INSERT INTO lead (l_name, address, contact, next_followup) VALUES (:l_name, :address, :contact, :next_followup)";
+        //echo $sql." anything";exit;
         $query = $this->db->prepare($sql);
         $parameters = array(':l_name' => $l_name, ':address' => $address, ':contact' => $contact, ':next_followup' => $next_followup);
 
         // useful for debugging: you can see the SQL behind above construction by using:
-        // echo '[ PDO DEBUG ]: ' . Helper::debugPDO($sql, $parameters);  exit();
+        echo '[ PDO DEBUG ]: ' . Helper::debugPDO($sql, $parameters);  exit();
 
         $query->execute($parameters);
     }

@@ -35,9 +35,9 @@ class Leads extends Controller
 
     public function addLead()
     {
-        if (isset($_POST["submit_add_lead"])) {
-            // do addLead() in model/model.php
-            $this->model->addLead($_POST["name"], $_POST["address"], $_POST["contact"], $_POST["nextfollowup"]);
+        if (isset($_POST["add_lead"])) {
+          //print_r($_POST); exit;
+          //$this->model->addLead($_POST["l_name"], $_POST["address"], $_POST["contact"], $_POST["status"], $_POST["next_followup"]);
         }
 
         header('location: ' . URL . 'leads/view');
@@ -55,15 +55,10 @@ class Leads extends Controller
 
     public function update($l_id)
     {
-        // if we have an id of a song that should be edited
         if (isset($l_id)) {
-            // do getSong() in model/model.php
+
             $lead = $this->model->getLead($l_id);
 
-            // in a real application we would also check if this db entry exists and therefore show the result or
-            // redirect the user to an error page or similar
-
-            // load views. within the views we can echo out $song easily
             require APP . 'view/_templates/header.php';
             require APP . 'view/_templates/sidebar.php';
             require APP . 'view/leads/update.php';
@@ -76,10 +71,10 @@ class Leads extends Controller
 
     public function updateLead()
     {
-        // if we have POST data to create a new song entry
+
         if (isset($_POST["submit_update_lead"])) {
-            // do updateSong() from model/model.php
-            $this->model->updateLead($_POST["l_name"], $_POST["address"], $_POST["contact"], $_POST["next_followup"]);
+
+            $this->model->updateLead($_POST["l_name"], $_POST["address"], $_POST["contact"], $_POST["status"], $_POST["next_followup"]);
         }
 
         // where to go after song has been added
