@@ -14,9 +14,43 @@ class Model
         }
     }
 
-    /**
-     * Get all songs from database
-     */
+    public function loginVerify($uname, $pwd)
+    {
+      $sql = "SELECT * FROM account";
+      $query = $this->db->prepare($sql);
+      $query->execute();
+      $accounts = $query->fetchAll();
+      foreach ($accounts as $account) {
+        $acc_uname = $account->uname;
+        $acc_pwd = $account->pwd;
+        $type = $account->type;
+        $a_id = $account->aid;
+        $log = array('a_id' => $a_id, 'type' => $type);
+
+        if ($uname == $acc_uname && $pwd == $acc_pwd) {
+          return $log;
+        }
+        else {
+          return null;
+        }
+      }
+    }
+
+    public function getAccount($a_id, $type)
+    {
+      if ($type == 'counsellor') {
+        $sql = "SELECT counsellor.c_id FROM counsellor INNER JOIN account WHERE counsellor.:a_id = account.:a_id";
+      }
+      else {
+        $sql = "SELECT top_mgmt.c_id FROM top_mgmt INNER JOIN account WHERE top_mgmt.:a_id = account.:a_id";
+      }
+
+      $query = $this->db->prepare($sql);
+      $parameters = array(':a_id' => $a_id);
+      $query->execute();
+      $accounts = $query->fetchAll();
+
+    }
     public function getAllLeads()
     {
         $sql = "SELECT * FROM lead";
@@ -29,18 +63,6 @@ class Model
         // $options = array(PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC ...
         return $query->fetchAll();
     }
-
-    /**
-     * Add a song to database
-     * TODO put this explanation into readme and remove it from here
-     * Please note that it's not necessary to "clean" our input in any way. With PDO all input is escaped properly
-     * automatically. We also don't use strip_tags() etc. here so we keep the input 100% original (so it's possible
-     * to save HTML and JS to the database, which is a valid use case). Data will only be cleaned when putting it out
-     * in the views (see the views for more info).
-     * @param string $artist Artist
-     * @param string $track Track
-     * @param string $link Link
-     */
 
     public function addLead($l_name, $address, $contact, $next_followup)
     {
@@ -55,18 +77,6 @@ class Model
         $query->execute($parameters);
     }
 
-    /**
-     * Update a song in database
-     * // TODO put this explaination into readme and remove it from here
-     * Please note that it's not necessary to "clean" our input in any way. With PDO all input is escaped properly
-     * automatically. We also don't use strip_tags() etc. here so we keep the input 100% original (so it's possible
-     * to save HTML and JS to the database, which is a valid use case). Data will only be cleaned when putting it out
-     * in the views (see the views for more info).
-     * @param string $artist Artist
-     * @param string $track Track
-     * @param string $link Link
-     * @param int $song_id Id
-     */
     public function updateLead($l_id, $l_name, $address, $contact, $next_followup)
     {
         $sql = "UPDATE lead SET l_id = :l_id, l_name = :l_name, address = :address, contact = :contact, next_followup = :next_followup WHERE l_id = :l_id";
