@@ -1,7 +1,7 @@
 <?php
-// session_start();
+session_start();
 
-public class Home extends Controller
+class Home extends Controller
 {
 
     public function index()
@@ -16,10 +16,9 @@ public class Home extends Controller
     {
       if (isset($_POST["loginSubmit"])) {
         //print_r($_POST); exit;
-        $log = new array();
         $log = $this->model->loginVerify($_POST["usrname"], $_POST["pwd"]);
         if (isset($log)) {
-          if ($log[1] == 'counsellor') {
+          if ($log == 'counsellor') {
             header('location: ' . URL . 'leads/index');
           }
           else {

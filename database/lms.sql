@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 09, 2016 at 06:04 PM
+-- Generation Time: Jan 09, 2016 at 06:37 PM
 -- Server version: 10.1.9-MariaDB
 -- PHP Version: 7.0.0
 
@@ -49,8 +49,7 @@ INSERT INTO `account` (`a_id`, `usrname`, `pwd`, `type`) VALUES
 CREATE TABLE `counsellor` (
   `c_id` int(11) NOT NULL,
   `c_name` varchar(30) NOT NULL,
-  `no_of_leads` int(11) NOT NULL,
-  `no_of_followups` int(11) NOT NULL
+  `a_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -92,15 +91,9 @@ CREATE TABLE `lead` (
 
 CREATE TABLE `top_mgmt` (
   `t_id` int(11) NOT NULL,
-  `t_name` varchar(20) NOT NULL
+  `t_name` varchar(20) NOT NULL,
+  `a_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `top_mgmt`
---
-
-INSERT INTO `top_mgmt` (`t_id`, `t_name`) VALUES
-(1, 'asdasd');
 
 --
 -- Indexes for dumped tables
@@ -119,7 +112,8 @@ ALTER TABLE `account`
 -- Indexes for table `counsellor`
 --
 ALTER TABLE `counsellor`
-  ADD PRIMARY KEY (`c_id`);
+  ADD PRIMARY KEY (`c_id`),
+  ADD KEY `a_id` (`a_id`);
 
 --
 -- Indexes for table `followup`
@@ -141,7 +135,8 @@ ALTER TABLE `lead`
 -- Indexes for table `top_mgmt`
 --
 ALTER TABLE `top_mgmt`
-  ADD PRIMARY KEY (`t_id`);
+  ADD PRIMARY KEY (`t_id`),
+  ADD KEY `a_id` (`a_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -177,6 +172,12 @@ ALTER TABLE `top_mgmt`
 --
 
 --
+-- Constraints for table `counsellor`
+--
+ALTER TABLE `counsellor`
+  ADD CONSTRAINT `counsellor_ibfk_1` FOREIGN KEY (`a_id`) REFERENCES `account` (`a_id`);
+
+--
 -- Constraints for table `followup`
 --
 ALTER TABLE `followup`
@@ -188,6 +189,12 @@ ALTER TABLE `followup`
 --
 ALTER TABLE `lead`
   ADD CONSTRAINT `lead_ibfk_1` FOREIGN KEY (`c_id`) REFERENCES `counsellor` (`c_id`);
+
+--
+-- Constraints for table `top_mgmt`
+--
+ALTER TABLE `top_mgmt`
+  ADD CONSTRAINT `top_mgmt_ibfk_1` FOREIGN KEY (`a_id`) REFERENCES `account` (`a_id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

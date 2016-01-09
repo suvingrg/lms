@@ -14,31 +14,32 @@ class Model
         }
     }
 
-    public function loginVerify($uname, $pwd)
+    public function loginVerify($usrname, $pwd)
     {
+
       $sql = "SELECT * FROM account";
       $query = $this->db->prepare($sql);
       $query->execute();
       $accounts = $query->fetchAll();
       foreach ($accounts as $account) {
         $a_id = $account->a_id;
-        $acc_uname = $account->usrname;
+        $acc_usrname = $account->usrname;
         $acc_pwd = $account->pwd;
         $type = $account->type;
 
-        $log = array(':a_id' => $a_id, ':type' => $type);
-
-        if ($uname == $acc_uname && $pwd == $acc_pwd) {
-          return $log;
+        if ($usrname == $acc_usrname && $pwd == $acc_pwd) {
+          return $type;
         }
         else {
           return null;
         }
       }
+
     }
 
-    public function getAccount($a_id, $type)
+    public function getAccount($a_id)
     {
+
       if ($type == 'counsellor') {
         $sql = "SELECT counsellor.c_id FROM counsellor INNER JOIN account WHERE counsellor.:a_id = account.:a_id";
       }
@@ -52,6 +53,7 @@ class Model
       $account = $query->fetchAll();
 
     }
+
     public function getAllLeads()
     {
         $sql = "SELECT * FROM lead";
