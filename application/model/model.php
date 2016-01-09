@@ -21,11 +21,12 @@ class Model
       $query->execute();
       $accounts = $query->fetchAll();
       foreach ($accounts as $account) {
-        $acc_uname = $account->uname;
+        $a_id = $account->a_id;
+        $acc_uname = $account->usrname;
         $acc_pwd = $account->pwd;
         $type = $account->type;
-        $a_id = $account->aid;
-        $log = array('a_id' => $a_id, 'type' => $type);
+
+        $log = array(':a_id' => $a_id, ':type' => $type);
 
         if ($uname == $acc_uname && $pwd == $acc_pwd) {
           return $log;
@@ -42,13 +43,13 @@ class Model
         $sql = "SELECT counsellor.c_id FROM counsellor INNER JOIN account WHERE counsellor.:a_id = account.:a_id";
       }
       else {
-        $sql = "SELECT top_mgmt.c_id FROM top_mgmt INNER JOIN account WHERE top_mgmt.:a_id = account.:a_id";
+        $sql = "SELECT top_mgmt.t_id FROM top_mgmt INNER JOIN account WHERE top_mgmt.:a_id = account.:a_id";
       }
 
       $query = $this->db->prepare($sql);
       $parameters = array(':a_id' => $a_id);
       $query->execute();
-      $accounts = $query->fetchAll();
+      $account = $query->fetchAll();
 
     }
     public function getAllLeads()
