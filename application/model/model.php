@@ -28,7 +28,7 @@ class Model
         $type = $account->type;
 
         if ($usrname == $acc_usrname && $pwd == $acc_pwd) {
-          return $type;
+          return array($a_id, $type);
         }
         else {
           return null;

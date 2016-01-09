@@ -16,9 +16,9 @@ class Home extends Controller
     {
       if (isset($_POST["loginSubmit"])) {
         //print_r($_POST); exit;
-        $log = $this->model->loginVerify($_POST["usrname"], $_POST["pwd"]);
-        if (isset($log)) {
-          if ($log == 'counsellor') {
+        list($a_id, $type) = $this->model->loginVerify($_POST["usrname"], $_POST["pwd"]);
+        if (isset(list)) {
+          if ($log($type) == 'counsellor') {
             header('location: ' . URL . 'leads/index');
           }
           else {
