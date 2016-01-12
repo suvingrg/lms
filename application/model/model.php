@@ -133,5 +133,12 @@ class Model
         // $options = array(PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC ...
         return $query->fetchAll();
     }
+    public function getActiveLeadReport(){
+      $sql = "SELECT * FROM `lead`";
+      $query = $this->db->prepare($sql);
+
+      // fetch() is the PDO method that get exactly one result
+      return $query->fetchAll();
+    }
 
 }
