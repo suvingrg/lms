@@ -184,7 +184,7 @@ class Model
         $parameters = array(':c_id' => $c_id, ':c_name' => $c_name);
 
         // useful for debugging: you can see the SQL behind above construction by using:
-        // echo '[ PDO DEBUG ]: ' . Helper::debugPDO($sql, $parameters);  exit();
+        //echo '[ PDO DEBUG ]: ' . Helper::debugPDO($sql, $parameters);  exit();
 
         $query->execute($parameters);
 

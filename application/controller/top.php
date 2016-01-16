@@ -63,7 +63,6 @@ class Top extends Controller
             require APP . 'view/top/update.php';
             require APP . 'view/_templates/footer.php';
         } else {
-            // redirect user to songs index page (as we don't have a song_id)
             header('location: ' . URL . 'top/view');
         }
     }
