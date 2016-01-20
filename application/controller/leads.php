@@ -27,6 +27,7 @@ class Leads extends Controller
     public function add() {
 
       $leads = $this->model->getAllLeads();
+      $c_ids = $this->model->getCounsellorIds();
 
       require APP . 'view/_templates/header.php';
       require APP . 'view/_templates/sidebar.php';
