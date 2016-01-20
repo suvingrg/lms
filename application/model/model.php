@@ -22,16 +22,12 @@ class Model
       $query->execute();
       $accounts = $query->fetchAll();
       foreach ($accounts as $account) {
-        $a_id = $account->a_id;
         $acc_usrname = $account->usrname;
         $acc_pwd = $account->pwd;
         $type = $account->type;
 
         if ($usrname == $acc_usrname && $pwd == $acc_pwd) {
-          return array($type);
-        }
-        else {
-          return null;
+          return $type;
         }
       }
 
@@ -123,7 +119,7 @@ class Model
 
     public function getAllFollowups()
     {
-        $sql = "SELECT * FROM followup";
+        $sql = "SELECT followup.f_id, followup.l_id, lead.l_name, counsellor.c_name, lead.status, followup.feedback, followup.next_followup FROM followup INNER JOIN lead ON followup.l_id = lead.l_id INNER JOIN counsellor ON followup.c_id = counsellor.c_id";
         $query = $this->db->prepare($sql);
         $query->execute();
 

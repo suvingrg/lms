@@ -9,7 +9,7 @@
         <label>Contact No.</label>
         <input type="text" name="contact" value="<?php echo htmlspecialchars($lead->contact, ENT_QUOTES, 'UTF-8'); ?>" required /><br><br>
         <label>Status</label>
-        <input type="text" name="contact" value="<?php echo htmlspecialchars($lead->contact, ENT_QUOTES, 'UTF-8'); ?>" required /><br><br>
+        <input type="text" name="status" value="<?php echo htmlspecialchars($lead->status, ENT_QUOTES, 'UTF-8'); ?>" required /><br><br>
         <label>Next Follow Up</label>
         <input type="text" name="next_followup" value="<?php echo htmlspecialchars($lead->next_followup, ENT_QUOTES, 'UTF-8'); ?>" required /><br><br>
         <input type="hidden" name="l_id" value="<?php echo htmlspecialchars($lead->l_id, ENT_QUOTES, 'UTF-8'); ?>" />

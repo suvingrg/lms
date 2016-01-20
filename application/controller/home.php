@@ -22,12 +22,13 @@ class Home extends Controller
             header('location: ' . URL . 'leads/index');
           }
           else {
-            header('location: ' . URL . 'leads/view');
+            header('location: ' . URL . 'top/index');
           }
-        } else {
+        // $_SESSION['id'] =
+        }
+        else {
           header('location: ' . URL . 'error/index');
         }
-        // $_SESSION['id'] =
       }
 
     }
