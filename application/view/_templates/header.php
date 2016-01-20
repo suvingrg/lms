@@ -7,7 +7,14 @@
     <link rel="shortcut icon" type="image/png" href="img/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- JS -->
+
+
+    <link rel="shortcut icon" href="  <?php echo URL; ?>img/devil-icon.png">
+
+
+
+
+<!-- JS -->
     <!-- please note: The JavaScript files are loaded in the footer to speed up page construction -->
     <!-- See more here: http://stackoverflow.com/q/2105327/1114320 -->
 
