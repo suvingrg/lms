@@ -141,4 +141,87 @@ class Model
       return $query->fetchAll();
     }
 
+    public function newCounsellor($c_name, $usrname, $pwd)
+    {
+      $sql = "INSERT INTO account (usrname, pwd, type) VALUES (:usrname, :pwd, :type)";
+      $query = $this->db->prepare($sql);
+      $parameters = array(':usrname' => $usrname, ':pwd' => $pwd, ':type' => 'counsellor');
+
+      // useful for debugging: you can see the SQL behind above construction by using:
+      //echo '[ PDO DEBUG ]: ' . Helper::debugPDO($sql, $parameters);  exit();
+
+      $query->execute($parameters);
+
+      $sql2 = "SELECT * FROM account WHERE usrname = :usrname LIMIT 1";
+      $query2 = $this->db->prepare($sql2);
+      $parameters2 = array(':usrname' => $usrname);
+
+      // useful for debugging: you can see the SQL behind above construction by using:
+      // echo '[ PDO DEBUG ]: ' . Helper::debugPDO($sql, $parameters);  exit();
+
+      $query2->execute($parameters2);
+
+      // fetch() is the PDO method that get exactly one result
+      $account = $query2->fetch();
+      $a_id = $account->a_id;
+
+      $sql3 = "INSERT INTO counsellor (c_name, a_id) VALUES (:c_name, :a_id)";
+      $query3 = $this->db->prepare($sql3);
+      $parameters3 = array(':c_name' => $c_name, ':a_id' => $a_id);
+      $query3->execute($parameters3);
+    }
+
+    public function getAllCounsellors()
+    {
+      $sql = "SELECT counsellor.c_id, counsellor.c_name, COUNT(followup.c_id) AS no_of_followups FROM counsellor INNER JOIN followup WHERE counsellor.c_id = followup.c_id";
+      $query = $this->db->prepare($sql);
+      $query->execute();
+
+      // fetchAll() is the PDO method that gets all result rows, here in object-style because we defined this in
+      // core/controller.php! If you prefer to get an associative array as the result, then do
+      // $query->fetchAll(PDO::FETCH_ASSOC); or change core/controller.php's PDO options to
+      // $options = array(PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC ...
+      return $query->fetchAll();
+    }
+
+    public function updateCounsellor($c_name, $usrname, $pwd, $c_id, $a_id)
+    {
+        $sql = "UPDATE counsellor SET c_name = :c_name WHERE c_id = :c_id";
+        $query = $this->db->prepare($sql);
+        $parameters = array(':c_id' => $c_id, ':c_name' => $c_name);
+
+        // useful for debugging: you can see the SQL behind above construction by using:
+        //echo '[ PDO DEBUG ]: ' . Helper::debugPDO($sql, $parameters);  exit();
+
+        $query->execute($parameters);
+
+
+        $sql2 = "UPDATE account SET usrname = :usrname, pwd = :pwd WHERE a_id = :a_id";
+        $query2 = $this->db->prepare($sql2);
+        $parameters2 = array(':a_id' => $a_id, ':usrname' => $usrname, ':pwd' => $pwd);
+
+        // useful for debugging: you can see the SQL behind above construction by using:
+        // echo '[ PDO DEBUG ]: ' . Helper::debugPDO($sql, $parameters);  exit();
+
+        $query2->execute($parameters2);
+
+    }
+    /**
+     * Get a song from database
+     */
+    public function getCounsellor($c_id)
+    {
+        $sql = "SELECT * FROM counsellor WHERE c_id = :c_id LIMIT 1";
+        $query = $this->db->prepare($sql);
+        $parameters = array(':c_id' => $c_id);
+
+        // useful for debugging: you can see the SQL behind above construction by using:
+        // echo '[ PDO DEBUG ]: ' . Helper::debugPDO($sql, $parameters);  exit();
+
+        $query->execute($parameters);
+
+        // fetch() is the PDO method that get exactly one result
+        return $query->fetch();
+    }
+
 }

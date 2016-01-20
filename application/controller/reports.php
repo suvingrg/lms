@@ -10,6 +10,7 @@ session_start();
  */
 class Reports extends Controller
 {
+<<<<<<< HEAD
     /**
      * PAGE: index
      * This method handles what happens when you move to http://yourproject/home/index (which is the default page btw)
@@ -32,4 +33,8 @@ class Reports extends Controller
       require APP . 'view/reports/activeleads.php';
       require APP . 'view/_templates/footer.php';
     }
+=======
+
+    
+>>>>>>> refs/remotes/suvingrg/master
 }

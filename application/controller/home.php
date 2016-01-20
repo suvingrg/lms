@@ -17,17 +17,17 @@ class Home extends Controller
       if (isset($_POST["loginSubmit"])) {
         //print_r($_POST); exit;
         list($a_id, $type) = $this->model->loginVerify($_POST["usrname"], $_POST["pwd"]);
-        if (isset(list)) {
-          if ($log($type) == 'counsellor') {
-            header('location: ' . URL . 'leads/index');
-          }
-          else {
-            header('location: ' . URL . 'leads/view');
-          }
-        } else {
-          header('location: ' . URL . 'error/index');
-        }
-        // $_SESSION['id'] =
+        // if (isset(list)) {
+        //   if ($log($type) == 'counsellor') {
+        //     header('location: ' . URL . 'leads/index');
+        //   }
+        //   else {
+        //     header('location: ' . URL . 'leads/view');
+        //   }
+        // } else {
+        //   header('location: ' . URL . 'error/index');
+        // }
+        // // $_SESSION['id'] =
       }
 
     }

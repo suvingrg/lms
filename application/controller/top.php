@@ -8,7 +8,7 @@ session_start();
  * This is really weird behaviour, but documented here: http://php.net/manual/en/language.oop5.decon.php
  *
  */
-class Leads extends Controller
+class Top extends Controller
 {
     /**
      * PAGE: index
@@ -20,68 +20,64 @@ class Leads extends Controller
         // load views
         require APP . 'view/_templates/header.php';
         require APP . 'view/_templates/sidebar.php';
-        require APP . 'view/leads/index.php';
+        require APP . 'view/top/index.php';
         require APP . 'view/_templates/footer.php';
     }
 
     public function add() {
 
-      $leads = $this->model->getAllLeads();
-
       require APP . 'view/_templates/header.php';
       require APP . 'view/_templates/sidebar.php';
-      require APP . 'view/leads/add.php';
+      require APP . 'view/top/add.php';
       require APP . 'view/_templates/footer.php';
     }
 
-    public function addLead()
+    public function addCounsellor()
     {
-        if (isset($_POST["add_lead"])) {
+        if (isset($_POST["submit_counsellor"])) {
           //print_r($_POST); exit;
-          $this->model->addLead($_POST["l_name"], $_POST["address"],
-          $_POST["contact"],
-          $_POST["status"], $_POST["next_followup"], $_SESSION['logid']);
+          $this->model->newCounsellor($_POST["c_name"], $_POST["usrname"], $_POST["pwd"]);
         }
 
-        header('location: ' . URL . 'leads/view');
+        header('location: ' . URL . 'top/index');
     }
 
     public function view() {
 
-      $leads = $this->model->getAllLeads();
+      $counsellors = $this->model->getAllCounsellors();
 
       require APP . 'view/_templates/header.php';
       require APP . 'view/_templates/sidebar.php';
-      require APP . 'view/leads/view.php';
+      require APP . 'view/top/view.php';
       require APP . 'view/_templates/footer.php';
     }
 
-    public function update($l_id)
+    public function update($c_id)
     {
-        if (isset($l_id)) {
+        if (isset($c_id)) {
 
-            $lead = $this->model->getLead($l_id);
+            $counsellor = $this->model->getCounsellor($c_id);
 
             require APP . 'view/_templates/header.php';
             require APP . 'view/_templates/sidebar.php';
-            require APP . 'view/leads/update.php';
+            require APP . 'view/top/update.php';
             require APP . 'view/_templates/footer.php';
         } else {
-            // redirect user to songs index page (as we don't have a song_id)
-            header('location: ' . URL . 'leads/view');
+            header('location: ' . URL . 'top/view');
         }
     }
 
-    public function updateLead()
+    public function updateCounsellor()
     {
 
-        if (isset($_POST["submit_update_lead"])) {
+        if (isset($_POST["submit_update_counsellor"])) {
 
-            $this->model->updateLead($_POST["l_name"], $_POST["address"], $_POST["contact"], $_POST["status"], $_POST["next_followup"]);
+            $this->model->updateCounsellor($_POST["c_name"], $_POST["usrname"], $_POST["pwd"], $_POST['c_id'], $_POST['a_id']);
         }
 
         // where to go after song has been added
-        header('location: ' . URL . 'leads/view');
+        header('location: ' . URL . 'top/view');
     }
+
 
 }
