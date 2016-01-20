@@ -10,6 +10,31 @@ session_start();
  */
 class Reports extends Controller
 {
+<<<<<<< HEAD
+    /**
+     * PAGE: index
+     * This method handles what happens when you move to http://yourproject/home/index (which is the default page btw)
+     */
+    public function index()
+    {
+
+        // load views
+        require APP . 'view/_templates/header.php';
+        require APP . 'view/_templates/sidebar.php';
+        require APP . 'view/leads/index.php';
+        require APP . 'view/_templates/footer.php';
+    }
+    public function activeLeads()
+    {
+      $this->model->getActiveLeadReport();
+
+      require APP . 'view/_templates/header.php';
+      require APP . 'view/_templates/sidebar.php';
+      require APP . 'view/reports/activeleads.php';
+      require APP . 'view/_templates/footer.php';
+    }
+=======
 
     
+>>>>>>> refs/remotes/suvingrg/master
 }
