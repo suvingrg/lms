@@ -83,7 +83,7 @@ class Model
         $parameters = array(':l_id' => $l_id, ':l_name' => $l_name, ':address' => $address, ':contact' => $contact, ':status' => $status, ':next_followup' => $next_followup, ':semester' => $semester);
 
         // useful for debugging: you can see the SQL behind above construction by using:
-        //echo '[ PDO DEBUG ]: ' . Helper::debugPDO($sql, $parameters);  exit();
+        // echo '[ PDO DEBUG ]: ' . Helper::debugPDO($sql, $parameters);  exit();
 
         $query->execute($parameters);
     }

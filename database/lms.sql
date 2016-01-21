@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 09, 2016 at 06:37 PM
+-- Generation Time: Jan 21, 2016 at 02:36 PM
 -- Server version: 10.1.9-MariaDB
 -- PHP Version: 7.0.0
 
@@ -30,7 +30,7 @@ CREATE TABLE `account` (
   `a_id` int(11) NOT NULL,
   `usrname` varchar(20) NOT NULL,
   `pwd` varchar(30) NOT NULL,
-  `type` varchar(11) NOT NULL
+  `type` varchar(11) NOT NULL DEFAULT 'counsellor'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -38,7 +38,15 @@ CREATE TABLE `account` (
 --
 
 INSERT INTO `account` (`a_id`, `usrname`, `pwd`, `type`) VALUES
-(1, 'chin', 'chang', 'counsellor');
+(1, 'chin', 'chang', 'counsellor'),
+(10, 'una', 'asdasdad', 'counsellor'),
+(12, 'asdasd', 'asdasdsadsada', 'counsellor'),
+(14, 'chote', 'miya2054', 'top_mgmt'),
+(15, 'dakndjmaklsdj iadj', 'dasdasdndksl jsadkasdkn', 'counsellor'),
+(16, 'dakndjmaklsdj iadjas', 'asdasdasdasdasdasd', 'counsellor'),
+(17, 'qweqweqwewqe', 'qweqweqeqw', 'counsellor'),
+(18, 'sadsani', '', 'top_mgmt'),
+(20, 'asdojadasdmlaskdasd', 'iasjdasdjiajsdamsldjalsdljasds', 'counsellor');
 
 -- --------------------------------------------------------
 
@@ -51,6 +59,15 @@ CREATE TABLE `counsellor` (
   `c_name` varchar(30) NOT NULL,
   `a_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `counsellor`
+--
+
+INSERT INTO `counsellor` (`c_id`, `c_name`, `a_id`) VALUES
+(7, 'sanu', 18),
+(8, 'sabname', 20),
+(9, 'asasdasdsad', 12);
 
 -- --------------------------------------------------------
 
@@ -67,6 +84,16 @@ CREATE TABLE `followup` (
   `next_followup` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `followup`
+--
+
+INSERT INTO `followup` (`f_id`, `c_id`, `l_id`, `f_date`, `feedback`, `next_followup`) VALUES
+(1, 7, 1, '2016-01-12 23:52:21', NULL, '2016-01-27'),
+(2, 9, 1, '2016-01-21 16:17:15', 'malae ta ekdam ramro lagyo', '2016-01-10'),
+(3, 9, 1, '2016-01-21 16:17:50', 'malae ta ekdam ramro lagyo', '2016-01-10'),
+(4, 7, 4, '2016-01-21 17:59:21', 'malae ta ekdam ramro lagyo', '0000-00-00');
+
 -- --------------------------------------------------------
 
 --
@@ -80,8 +107,18 @@ CREATE TABLE `lead` (
   `contact` varchar(11) NOT NULL,
   `c_id` int(11) NOT NULL,
   `status` varchar(11) NOT NULL DEFAULT 'active',
-  `next_followup` date NOT NULL
+  `next_followup` date NOT NULL,
+  `semester` varchar(10) NOT NULL DEFAULT 'First'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `lead`
+--
+
+INSERT INTO `lead` (`l_id`, `l_name`, `address`, `contact`, `c_id`, `status`, `next_followup`, `semester`) VALUES
+(1, 'Prakash', 'Shekhar ko mutu ko xeu ma', '980584321', 7, 'active', '2016-01-13', 'Fifth'),
+(4, 'chote miya', 'asdasdasd', '213123123', 7, 'active', '2016-01-04', 'First'),
+(5, 'chote miya ko vai', 'uni ko mutu ko xeu ma', '212123123', 9, 'active', '2016-01-19', 'Final');
 
 -- --------------------------------------------------------
 
@@ -105,8 +142,7 @@ CREATE TABLE `top_mgmt` (
 ALTER TABLE `account`
   ADD PRIMARY KEY (`a_id`),
   ADD UNIQUE KEY `usrname` (`usrname`),
-  ADD UNIQUE KEY `pwd` (`pwd`),
-  ADD UNIQUE KEY `TYPE` (`type`);
+  ADD UNIQUE KEY `pwd` (`pwd`);
 
 --
 -- Indexes for table `counsellor`
@@ -146,27 +182,27 @@ ALTER TABLE `top_mgmt`
 -- AUTO_INCREMENT for table `account`
 --
 ALTER TABLE `account`
-  MODIFY `a_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `a_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT for table `counsellor`
 --
 ALTER TABLE `counsellor`
-  MODIFY `c_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `c_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `followup`
 --
 ALTER TABLE `followup`
-  MODIFY `f_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `f_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `lead`
 --
 ALTER TABLE `lead`
-  MODIFY `l_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `l_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `top_mgmt`
 --
 ALTER TABLE `top_mgmt`
-  MODIFY `t_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `t_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- Constraints for dumped tables
 --
