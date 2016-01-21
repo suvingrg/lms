@@ -1,27 +1,41 @@
+
 body {
     font-family: Arial;
-    font-size: 14px;
+    font-size: 19px;
+    color: #777;
 }
 .header {
     font-size: 4em;
     font-weight: bolder;
     letter-spacing: -3px;
-    color: #222;
     text-align: center;
-    /*margin: 20px 30px;*/
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 17px;
 }
-/*.header .number, .footer {
-    color: #222;
-    opacity: 0.1;
-}*/
 .footer {
-  /*border-top:;*/
+  border-top: 1px solid #ddd;
+  padding: 17px 0px;
   font-size: 1em;
-  color: #222;
   text-align: center;
+}
+.header, .footer {
+  color: #ea6153;
+  background-color: #fff;
 }
 .navigation {
     margin-left: 33px;
+}
+h1, h2, h3 {
+  text-align: center;
+}
+h2 {
+  font-size: 2em;
+}
+h3 {
+  color: #c0392b;
+}
+p{
+  margin: 0;
 }
 .navigation a {
     display: inline-block;
@@ -39,16 +53,19 @@ body {
     background: transparent;
 }
 .container {
-    border: 1px solid #ddd;
     padding: 20px;
-    margin: 33px;
+    margin: 33px 0 33px 33px;
+    width: 60%;
 }
 .container a {
-    color: #222;
+    color: #ea6153;
 }
 .container table {
-    font-size: 11px;
+    font-size: 14px;
     margin-top: 20px;
+}
+.container table thead {
+  font-weight: bold;
 }
 .container table thead td {
     background-color: #f5f5f5;
@@ -69,28 +86,75 @@ body {
 }
 .container input[type="submit"] {
     background-color: #ccc;
+    color: #ea6153;
     cursor: pointer;
+    padding: 10px 49px;
+    font-weight: bold;
 }
 .container input[type="submit"]:hover {
-    background-color: #222;
+    background-color: #ea6153;
     color: #fff;
 }
 .container button {
     background-color: #ccc;
+    color: #ea6153;
     border: 0;
-    padding: 5px 10px;
+    padding: 10px 49px;
     cursor: pointer;
+    font-weight: bold;
 }
 .container button:hover {
-    background-color: #222;
+    background-color: #ea6153;
     color: #fff;
 }
 
-
-/* add page */
-.mini-container ul {
-
+.sidebar {
+  padding-right: 10%;
+  border-right: 1px solid #ddd;
 }
-.mini-container ul li {
-  display: inline;
+
+.container {
+  display: inline-flex;
+}
+
+.mini-container, .dashboard {
+  padding-left: 10%;
+}
+
+/* login */
+#loginbox {
+  padding: 0 36%;
+}
+
+#loginbox h2 {
+  text-align: center;
+}
+
+#loginButton {
+  padding: 10px 73px;
+}
+ul li {
+  list-style-type:;
+}
+
+a{
+  text-decoration: none;
+}
+.dashboard a:hover {
+  font-size: 1.4em;
+  font-weight: bold;
+  color: #ea6153;
+}
+
+.view a:hover {
+  background-color: #ea6153;
+  color: #fff;
+}
+
+.addlead {
+  margin-left: -5%;
+}
+
+#fdate {
+  width: 74px;
 }
