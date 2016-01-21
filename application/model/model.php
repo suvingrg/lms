@@ -232,4 +232,72 @@ class Model
       return $query->fetchAll();
     }
 
+    public function counsellorReport($c_name)
+    {
+      $sql = "SELECT lead.l_id, lead.l_name, lead.address, lead.contact, counsellor.c_name, lead.status, lead.next_followup, lead.semester FROM lead INNER JOIN counsellor WHERE lead.c_id = counsellor.c_id AND :c_name = counsellor.c_name";
+      $query = $this->db->prepare($sql);
+      $parameters = array(':c_name' => $c_name);
+      $query->execute($parameters);
+
+      // fetchAll() is the PDO method that gets all result rows, here in object-style because we defined this in
+      // core/controller.php! If you prefer to get an associative array as the result, then do
+      // $query->fetchAll(PDO::FETCH_ASSOC); or change core/controller.php's PDO options to
+      // $options = array(PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC ...
+      return $query->fetchAll();
+    }
+
+    public function getActiveLeads()
+    {
+      $sql = "SELECT lead.l_id, lead.l_name, lead.address, lead.contact, lead.status, lead.next_followup FROM lead WHERE lead.status='active' ";
+      $query = $this->db->prepare($sql);
+      $query->execute();
+
+      // fetchAll() is the PDO method that gets all result rows, here in object-style because we defined this in
+      // core/controller.php! If you prefer to get an associative array as the result, then do
+      // $query->fetchAll(PDO::FETCH_ASSOC); or change core/controller.php's PDO options to
+      // $options = array(PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC ...
+      return $query->fetchAll();
+    }
+
+    public function statusReport($status)
+    {
+      $sql = "SELECT lead.l_id, lead.l_name, lead.address, lead.contact, counsellor.c_name, lead.status, lead.next_followup, lead.semester FROM lead INNER JOIN counsellor WHERE lead.c_id = counsellor.c_id AND :status = lead.status";
+      $query = $this->db->prepare($sql);
+      $parameters = array(':status' => $status);
+      $query->execute($parameters);
+
+      // fetchAll() is the PDO method that gets all result rows, here in object-style because we defined this in
+      // core/controller.php! If you prefer to get an associative array as the result, then do
+      // $query->fetchAll(PDO::FETCH_ASSOC); or change core/controller.php's PDO options to
+      // $options = array(PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC ...
+      return $query->fetchAll();
+    }
+
+    public function getCounsellors()
+    {
+      $sql = "SELECT * FROM counsellor";
+      $query = $this->db->prepare($sql);
+      $query->execute();
+
+      // fetchAll() is the PDO method that gets all result rows, here in object-style because we defined this in
+      // core/controller.php! If you prefer to get an associative array as the result, then do
+      // $query->fetchAll(PDO::FETCH_ASSOC); or change core/controller.php's PDO options to
+      // $options = array(PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC ...
+      return $query->fetchAll();
+    }
+
+    public function customizedReport($c_name, $dated, $semester)
+    {
+      $sql = "SELECT lead.l_id, lead.l_name, lead.address, lead.contact, counsellor.c_name, lead.status, lead.next_followup, lead.semester FROM lead INNER JOIN counsellor WHERE lead.c_id = counsellor.c_id AND :c_name = counsellor.c_name AND :semester = lead.semester OR :dated = lead.next_followup";
+      $query = $this->db->prepare($sql);
+      $parameters = array(':c_name' => $c_name, ':dated' => $dated, ':semester' => $semester);
+      $query->execute($parameters);
+
+      // fetchAll() is the PDO method that gets all result rows, here in object-style because we defined this in
+      // core/controller.php! If you prefer to get an associative array as the result, then do
+      // $query->fetchAll(PDO::FETCH_ASSOC); or change core/controller.php's PDO options to
+      // $options = array(PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC ...
+      return $query->fetchAll();
+    }
+
 }
