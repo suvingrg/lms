@@ -14,9 +14,9 @@
             </thead>
             <tbody id='records'>
               <tr>
-                <td><input type="text" name="l_name" required /></td>
+                <td><input type="text" name="l_name" placeholder="Full Name" required /></td>
                 <td><input type="text" name="address" required /></td>
-                <td><input type="text" name="contact" required /></td>
+                <td><input type="text" name="contact" style="width: 70px;" required /></td>
                 <td>
                   <select name="status">
                     <option value="active" selected="true">Active</option>
@@ -32,7 +32,7 @@
                     <?php } ?>
                   </select>
                 </td>
-                <td><input type="text" name="next_followup" required /></td>
+                <td><input type="text" name="next_followup" style="width: 87px;" placeholder="YYYY-MM-DD" required /></td>
               </tr>
             </tbody>
           </table>

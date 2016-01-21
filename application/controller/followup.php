@@ -16,6 +16,8 @@ class Followup extends Controller
      */
     public function index()
     {
+        $leads = $this->model->getAllLeads();
+        $c_ids = $this->model->getCounsellorIds();
         // load views
         require APP . 'view/_templates/header.php';
         require APP . 'view/_templates/sidebar.php';
@@ -23,14 +25,14 @@ class Followup extends Controller
         require APP . 'view/_templates/footer.php';
     }
 
-    public function addfollowup($c_id)
+    public function addfollowup()
     {
       if (isset($_POST["submit_followup"])) {
-
+          //print_r($_POST); exit;
           $this->model->addFollowup($_POST['l_id'], $_POST["status"], $_POST["feedback"], $_POST["next_followup"], $_POST["c_id"]);
       }
 
-      header('location: ' . URL . 'leads/index');
+      header('location: ' . URL . 'followup/view');
     }
 
     public function view() {

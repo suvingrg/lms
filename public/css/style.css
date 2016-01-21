@@ -34,6 +34,9 @@ h2 {
 h3 {
   color: #c0392b;
 }
+p{
+  margin: 0;
+}
 .navigation a {
     display: inline-block;
     padding: 10px 15px;
@@ -51,7 +54,8 @@ h3 {
 }
 .container {
     padding: 20px;
-    margin: 33px;
+    margin: 33px 0 33px 33px;
+    width: 60%;
 }
 .container a {
     color: #ea6153;
@@ -111,7 +115,6 @@ h3 {
 
 .container {
   display: inline-flex;
-  width: 100%;
 }
 
 .mini-container, .dashboard {
@@ -149,5 +152,9 @@ a{
 }
 
 .addlead {
-  margin-left: -10%;
+  margin-left: -5%;
+}
+
+#fdate {
+  width: 74px;
 }

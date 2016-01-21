@@ -63,15 +63,15 @@ class Model
         return $query->fetchAll();
     }
 
-    public function addLead($l_name, $address, $contact, $next_followup)
+    public function addLead($l_name, $address, $contact, $status, $c_id, $next_followup)
     {
-        $sql = "INSERT INTO lead (l_name, address, contact, next_followup) VALUES (:l_name, :address, :contact, :next_followup)";
+        $sql = "INSERT INTO lead (l_name, address, contact, status, c_id, next_followup) VALUES (:l_name, :address, :contact, :status, :c_id, :next_followup)";
         //echo $sql." anything";exit;
         $query = $this->db->prepare($sql);
-        $parameters = array(':l_name' => $l_name, ':address' => $address, ':contact' => $contact, ':next_followup' => $next_followup);
+        $parameters = array(':l_name' => $l_name, ':address' => $address, ':contact' => $contact, ':status' => $status, ':c_id' => $c_id, ':next_followup' => $next_followup);
 
         // useful for debugging: you can see the SQL behind above construction by using:
-        echo '[ PDO DEBUG ]: ' . Helper::debugPDO($sql, $parameters);  exit();
+        //echo '[ PDO DEBUG ]: ' . Helper::debugPDO($sql, $parameters);  exit();
 
         $query->execute($parameters);
     }
@@ -107,14 +107,20 @@ class Model
 
     public function addFollowup($l_id, $status, $feedback, $next_followup, $c_id)
     {
-      $sql = "INSERT INTO followup (c_id, l_id, status, feedback, next_followup) VALUES (:c_id, :l_id, :status, :feedback, :next_followup)";
+      $sql = "INSERT INTO followup (c_id, l_id, feedback, next_followup) VALUES (:c_id, :l_id, :feedback, :next_followup)";
       $query = $this->db->prepare($sql);
-      $parameters = array(':c_id' => $c_id, ':l_id' => $l_id, ':status' => $status, ':feedback' => $feedback, ':next_followup' => $next_followup);
+      $parameters = array(':c_id' => $c_id, ':l_id' => $l_id, ':feedback' => $feedback, ':next_followup' => $next_followup);
 
       // useful for debugging: you can see the SQL behind above construction by using:
-      // echo '[ PDO DEBUG ]: ' . Helper::debugPDO($sql, $parameters);  exit();
+      //echo '[ PDO DEBUG ]: ' . Helper::debugPDO($sql, $parameters);  exit();
 
       $query->execute($parameters);
+
+      $sql2 = "UPDATE lead SET status = :status WHERE l_id = :l_id";
+      $query2 = $this->db->prepare($sql);
+      $parameters2 = array(':l_id' => $l_id, ':status' => $status);
+
+      $query2->execute($parameters2);
     }
 
     public function getAllFollowups()

@@ -39,9 +39,7 @@ class Leads extends Controller
     {
         if (isset($_POST["add_lead"])) {
           //print_r($_POST); exit;
-          $this->model->addLead($_POST["l_name"], $_POST["address"],
-          $_POST["contact"],
-          $_POST["status"], $_POST["next_followup"], $_SESSION['logid']);
+          $this->model->addLead($_POST["l_name"], $_POST["address"], $_POST["contact"], $_POST["status"], $_POST["c_id"], $_POST["next_followup"]);
         }
 
         header('location: ' . URL . 'leads/view');

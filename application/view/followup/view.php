@@ -19,7 +19,7 @@
                   <td><?php if (isset($followup->c_name)) echo htmlspecialchars($followup->c_name, ENT_QUOTES, 'UTF-8'); ?></td>
                   <td><?php if (isset($followup->status)) echo htmlspecialchars($followup->status, ENT_QUOTES, 'UTF-8'); ?></td>
                   <td><?php if (isset($followup->feedback)) echo htmlspecialchars($followup->feedback, ENT_QUOTES, 'UTF-8'); ?></td>
-                  <td><?php if (isset($followup->next_followup)) echo htmlspecialchars($followup->next_followup, ENT_QUOTES, 'UTF-8'); ?></td>
+                  <td><p id="fdate"><?php if (isset($followup->next_followup)) echo htmlspecialchars($followup->next_followup, ENT_QUOTES, 'UTF-8'); ?></p></td>
               </tr>
           <?php } ?>
         </tbody>
