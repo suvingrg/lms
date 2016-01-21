@@ -10,6 +10,7 @@
           <td>Counsellor</td>
           <td>Status</td>
           <td>Next Follow Up</td>
+          <td>Semester</td>
         </thead>
         <tbody>
           <?php foreach ($leads as $lead) { ?>
@@ -21,6 +22,7 @@
                   <td><?php if (isset($lead->c_name)) echo htmlspecialchars($lead->c_name, ENT_QUOTES, 'UTF-8'); ?></td>
                   <td><?php if (isset($lead->status)) echo htmlspecialchars($lead->status, ENT_QUOTES, 'UTF-8'); ?></td>
                   <td><p id="fdate"><?php if (isset($lead->next_followup)) echo htmlspecialchars($lead->next_followup, ENT_QUOTES, 'UTF-8'); ?></p></td>
+                  <td><?php if (isset($lead->semester)) echo htmlspecialchars($lead->semester, ENT_QUOTES, 'UTF-8'); ?></td>
                   <td><a href="<?php echo URL . 'leads/update/' . htmlspecialchars($lead->l_id, ENT_QUOTES, 'UTF-8'); ?>">Update</a></td>
               </tr>
           <?php } ?>

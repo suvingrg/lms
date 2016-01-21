@@ -39,7 +39,7 @@ class Leads extends Controller
     {
         if (isset($_POST["add_lead"])) {
           //print_r($_POST); exit;
-          $this->model->addLead($_POST["l_name"], $_POST["address"], $_POST["contact"], $_POST["status"], $_POST["c_id"], $_POST["next_followup"]);
+          $this->model->addLead($_POST["l_name"], $_POST["address"], $_POST["contact"], $_POST["status"], $_POST["c_id"], $_POST["next_followup"], $_POST["semester"]);
         }
 
         header('location: ' . URL . 'leads/view');
@@ -76,7 +76,7 @@ class Leads extends Controller
 
         if (isset($_POST["submit_update_lead"])) {
 
-            $this->model->updateLead($_POST["l_name"], $_POST["address"], $_POST["contact"], $_POST["status"], $_POST["next_followup"]);
+            $this->model->updateLead($_POST["l_name"], $_POST["address"], $_POST["contact"], $_POST["status"], $_POST["next_followup"], $_POST["semester"], $_POST["l_id"]);
         }
 
         // where to go after song has been added

@@ -11,6 +11,7 @@
               <td><label>Status</label></td>
               <td><label>Counsellor ID</label></td>
               <td><label>Next Follow Up</label></td>
+              <td><label>Semester</label></td>
             </thead>
             <tbody id='records'>
               <tr>
@@ -33,6 +34,7 @@
                   </select>
                 </td>
                 <td><input type="text" name="next_followup" style="width: 87px;" placeholder="YYYY-MM-DD" required /></td>
+                <td><input type="text" name="semester" style="width: 87px;" placeholder="First" required /></td>
               </tr>
             </tbody>
           </table>

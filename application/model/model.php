@@ -52,7 +52,7 @@ class Model
 
     public function getAllLeads()
     {
-        $sql = "SELECT lead.l_id, lead.l_name, lead.address, lead.contact, counsellor.c_name, lead.status, lead.next_followup FROM lead INNER JOIN counsellor WHERE lead.c_id = counsellor.c_id";
+        $sql = "SELECT lead.l_id, lead.l_name, lead.address, lead.contact, counsellor.c_name, lead.status, lead.next_followup, lead.semester FROM lead INNER JOIN counsellor WHERE lead.c_id = counsellor.c_id";
         $query = $this->db->prepare($sql);
         $query->execute();
 
@@ -63,12 +63,12 @@ class Model
         return $query->fetchAll();
     }
 
-    public function addLead($l_name, $address, $contact, $status, $c_id, $next_followup)
+    public function addLead($l_name, $address, $contact, $status, $c_id, $next_followup, $semester)
     {
-        $sql = "INSERT INTO lead (l_name, address, contact, status, c_id, next_followup) VALUES (:l_name, :address, :contact, :status, :c_id, :next_followup)";
+        $sql = "INSERT INTO lead (l_name, address, contact, status, c_id, next_followup, semester) VALUES (:l_name, :address, :contact, :status, :c_id, :next_followup, :semester)";
         //echo $sql." anything";exit;
         $query = $this->db->prepare($sql);
-        $parameters = array(':l_name' => $l_name, ':address' => $address, ':contact' => $contact, ':status' => $status, ':c_id' => $c_id, ':next_followup' => $next_followup);
+        $parameters = array(':l_name' => $l_name, ':address' => $address, ':contact' => $contact, ':status' => $status, ':c_id' => $c_id, ':next_followup' => $next_followup, ':semester' => $semester);
 
         // useful for debugging: you can see the SQL behind above construction by using:
         //echo '[ PDO DEBUG ]: ' . Helper::debugPDO($sql, $parameters);  exit();
@@ -76,14 +76,14 @@ class Model
         $query->execute($parameters);
     }
 
-    public function updateLead($l_id, $l_name, $address, $contact, $next_followup)
+    public function updateLead($l_name, $address, $contact, $status, $next_followup, $semester, $l_id)
     {
-        $sql = "UPDATE lead SET l_id = :l_id, l_name = :l_name, address = :address, contact = :contact, next_followup = :next_followup WHERE l_id = :l_id";
+        $sql = "UPDATE lead SET l_name = :l_name, address = :address, contact = :contact, status = :status, next_followup = :next_followup, semester = :semester WHERE l_id = :l_id";
         $query = $this->db->prepare($sql);
-        $parameters = array(':l_id' => $l_id, ':l_name' => $l_name, ':address' => $address, ':contact' => $contact, ':next_followup' => $next_followup);
+        $parameters = array(':l_id' => $l_id, ':l_name' => $l_name, ':address' => $address, ':contact' => $contact, ':status' => $status, ':next_followup' => $next_followup, ':semester' => $semester);
 
         // useful for debugging: you can see the SQL behind above construction by using:
-        // echo '[ PDO DEBUG ]: ' . Helper::debugPDO($sql, $parameters);  exit();
+        //echo '[ PDO DEBUG ]: ' . Helper::debugPDO($sql, $parameters);  exit();
 
         $query->execute($parameters);
     }
