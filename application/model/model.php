@@ -107,25 +107,25 @@ class Model
 
     public function addFollowup($l_id, $status, $feedback, $next_followup, $c_id)
     {
-      $sql = "INSERT INTO followup (c_id, l_id, feedback, next_followup) VALUES (:c_id, :l_id, :feedback, :next_followup)";
+      $sql = "INSERT INTO followup (c_id, l_id, feedback) VALUES (:c_id, :l_id, :feedback)";
       $query = $this->db->prepare($sql);
-      $parameters = array(':c_id' => $c_id, ':l_id' => $l_id, ':feedback' => $feedback, ':next_followup' => $next_followup);
+      $parameters = array(':c_id' => $c_id, ':l_id' => $l_id, ':feedback' => $feedback);
 
       // useful for debugging: you can see the SQL behind above construction by using:
       //echo '[ PDO DEBUG ]: ' . Helper::debugPDO($sql, $parameters);  exit();
 
       $query->execute($parameters);
 
-      $sql2 = "UPDATE lead SET status = :status WHERE l_id = :l_id";
+      $sql2 = "UPDATE lead SET status = :status, next_followup = :next_followup WHERE l_id = :l_id";
       $query2 = $this->db->prepare($sql);
-      $parameters2 = array(':l_id' => $l_id, ':status' => $status);
-
+      $parameters2 = array(':l_id' => $l_id, ':status' => $status, ':next_followup' => $next_followup);
+      //echo '[ PDO DEBUG ]: ' . Helper::debugPDO($sql2, $parameters2);  exit();
       $query2->execute($parameters2);
     }
 
     public function getAllFollowups()
     {
-        $sql = "SELECT followup.f_id, followup.l_id, lead.l_name, counsellor.c_name, lead.status, followup.feedback, followup.next_followup FROM followup INNER JOIN lead ON followup.l_id = lead.l_id INNER JOIN counsellor ON followup.c_id = counsellor.c_id";
+        $sql = "SELECT followup.f_id, followup.l_id, lead.l_name, counsellor.c_name, lead.status, followup.feedback, lead.next_followup FROM followup INNER JOIN lead ON followup.l_id = lead.l_id INNER JOIN counsellor ON followup.c_id = counsellor.c_id";
         $query = $this->db->prepare($sql);
         $query->execute();
 
@@ -133,6 +133,7 @@ class Model
         // core/controller.php! If you prefer to get an associative array as the result, then do
         // $query->fetchAll(PDO::FETCH_ASSOC); or change core/controller.php's PDO options to
         // $options = array(PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC ...
+        //echo '[ PDO DEBUG ]: ' . Helper::debugPDO($sql, $parameters);  exit();
         return $query->fetchAll();
     }
 

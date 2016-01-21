@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 21, 2016 at 02:36 PM
+-- Generation Time: Jan 21, 2016 at 10:26 PM
 -- Server version: 10.1.9-MariaDB
 -- PHP Version: 7.0.0
 
@@ -80,19 +80,23 @@ CREATE TABLE `followup` (
   `c_id` int(11) NOT NULL,
   `l_id` int(11) NOT NULL,
   `f_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `feedback` varchar(50) DEFAULT NULL,
-  `next_followup` date NOT NULL
+  `feedback` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `followup`
 --
 
-INSERT INTO `followup` (`f_id`, `c_id`, `l_id`, `f_date`, `feedback`, `next_followup`) VALUES
-(1, 7, 1, '2016-01-12 23:52:21', NULL, '2016-01-27'),
-(2, 9, 1, '2016-01-21 16:17:15', 'malae ta ekdam ramro lagyo', '2016-01-10'),
-(3, 9, 1, '2016-01-21 16:17:50', 'malae ta ekdam ramro lagyo', '2016-01-10'),
-(4, 7, 4, '2016-01-21 17:59:21', 'malae ta ekdam ramro lagyo', '0000-00-00');
+INSERT INTO `followup` (`f_id`, `c_id`, `l_id`, `f_date`, `feedback`) VALUES
+(1, 7, 1, '2016-01-12 23:52:21', NULL),
+(2, 9, 1, '2016-01-21 16:17:15', 'malae ta ekdam ramro lagyo'),
+(3, 9, 1, '2016-01-21 16:17:50', 'malae ta ekdam ramro lagyo'),
+(4, 7, 4, '2016-01-21 17:59:21', 'malae ta ekdam ramro lagyo'),
+(5, 9, 1, '2016-01-22 03:02:57', 'yeah'),
+(6, 9, 5, '2016-01-22 03:09:13', 'yahoo'),
+(7, 9, 5, '2016-01-22 03:09:57', 'yahoo'),
+(8, 9, 5, '2016-01-22 03:10:24', 'yahoo'),
+(9, 9, 5, '2016-01-22 03:11:17', 'yahoo');
 
 -- --------------------------------------------------------
 
@@ -118,7 +122,7 @@ CREATE TABLE `lead` (
 INSERT INTO `lead` (`l_id`, `l_name`, `address`, `contact`, `c_id`, `status`, `next_followup`, `semester`) VALUES
 (1, 'Prakash', 'Shekhar ko mutu ko xeu ma', '980584321', 7, 'active', '2016-01-13', 'Fifth'),
 (4, 'chote miya', 'asdasdasd', '213123123', 7, 'active', '2016-01-04', 'First'),
-(5, 'chote miya ko vai', 'uni ko mutu ko xeu ma', '212123123', 9, 'active', '2016-01-19', 'Final');
+(5, 'chote miya ko vai', 'uni ko mutu ko xeu ma', '212123123', 9, 'active', '2017-04-13', 'Final');
 
 -- --------------------------------------------------------
 
@@ -192,7 +196,7 @@ ALTER TABLE `counsellor`
 -- AUTO_INCREMENT for table `followup`
 --
 ALTER TABLE `followup`
-  MODIFY `f_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `f_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `lead`
 --
