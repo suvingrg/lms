@@ -1,25 +1,38 @@
+
 body {
     font-family: Arial;
     font-size: 19px;
+    color: #777;
 }
 .header {
     font-size: 4em;
     font-weight: bolder;
     letter-spacing: -3px;
-    color: #222;
     text-align: center;
     border-bottom: 1px solid #ddd;
     padding-bottom: 17px;
 }
 .footer {
   border-top: 1px solid #ddd;
-  padding-top: 17px;
+  padding: 17px 0px;
   font-size: 1em;
-  color: #222;
   text-align: center;
+}
+.header, .footer {
+  color: #ea6153;
+  background-color: #fff;
 }
 .navigation {
     margin-left: 33px;
+}
+h1, h2, h3 {
+  text-align: center;
+}
+h2 {
+  font-size: 2em;
+}
+h3 {
+  color: #c0392b;
 }
 .navigation a {
     display: inline-block;
@@ -41,7 +54,7 @@ body {
     margin: 33px;
 }
 .container a {
-    color: #222;
+    color: #ea6153;
 }
 .container table {
     font-size: 14px;
@@ -69,33 +82,40 @@ body {
 }
 .container input[type="submit"] {
     background-color: #ccc;
+    color: #ea6153;
     cursor: pointer;
     padding: 10px 49px;
     font-weight: bold;
 }
 .container input[type="submit"]:hover {
-    background-color: #222;
+    background-color: #ea6153;
     color: #fff;
 }
 .container button {
     background-color: #ccc;
+    color: #ea6153;
     border: 0;
     padding: 10px 49px;
     cursor: pointer;
     font-weight: bold;
 }
 .container button:hover {
-    background-color: #222;
+    background-color: #ea6153;
     color: #fff;
 }
 
 .sidebar {
-  padding-right: 15%;
+  padding-right: 10%;
+  border-right: 1px solid #ddd;
 }
 
 .container {
   display: inline-flex;
   width: 100%;
+}
+
+.mini-container, .dashboard {
+  padding-left: 10%;
 }
 
 /* login */
@@ -120,9 +140,14 @@ a{
 .dashboard a:hover {
   font-size: 1.4em;
   font-weight: bold;
+  color: #ea6153;
 }
 
 .view a:hover {
-  background-color: #333;
-  color: #ddd;
+  background-color: #ea6153;
+  color: #fff;
+}
+
+.addlead {
+  margin-left: -10%;
 }
