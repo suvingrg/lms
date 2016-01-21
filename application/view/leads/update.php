@@ -1,6 +1,6 @@
 
   <div class="mini-container">
-    <h2></h2>
+    <h2>UPDATE LEAD</h2>
     <form action="<?php echo URL; ?>leads/updateLead" method="POST">
         <label>Name</label>
         <input autofocus type="text" name="l_name" value="<?php echo htmlspecialchars($lead->l_name, ENT_QUOTES, 'UTF-8'); ?>" required /><br><br>

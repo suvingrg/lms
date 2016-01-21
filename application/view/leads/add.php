@@ -40,7 +40,7 @@
           </table>
           <br>
           <input type="submit" name="add_lead" value="Done" />
-          <!-- <button type="button" id="addmore">Add More</button> -->
+          <button type="button" id="addmore">Add More</button>
           <a href="<?php echo URL; ?>leads/index"><button type="button" name="back">Back</button></a>
       </form>
 
