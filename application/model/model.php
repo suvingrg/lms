@@ -169,7 +169,7 @@ class Model
 
     public function getAllCounsellors()
     {
-      $sql = "SELECT counsellor.c_id, counsellor.c_name, COUNT(followup.c_id) AS no_of_followups FROM counsellor INNER JOIN followup WHERE counsellor.c_id = followup.c_id";
+      $sql = "SELECT * FROM counsellor";
       $query = $this->db->prepare($sql);
       $query->execute();
 

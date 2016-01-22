@@ -39,7 +39,7 @@ class Top extends Controller
           $this->model->newCounsellor($_POST["c_name"], $_POST["usrname"], $_POST["pwd"]);
         }
 
-        header('location: ' . URL . 'top/index');
+        header('location: ' . URL . 'top/view');
     }
 
     public function view() {
