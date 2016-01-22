@@ -2,7 +2,7 @@
 
     <div id="loginbox">
       <h2>Login</h2>
-      <img src="img/demo-image.jpg" alt="" />
+      <img src="img/account.png" id="logaccount" alt="" />
       <fieldset style="border: none;">
         <form action="<?php echo URL; ?>home/login" method="POST">
           <input type="text" name="usrname" placeholder="Username" required /><br /><br />

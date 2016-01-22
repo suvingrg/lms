@@ -158,3 +158,11 @@ a{
 #fdate {
   width: 74px;
 }
+
+#account, #logaccount {
+  width: 150px;
+  height: 150px;
+}
+#logaccount {
+  padding-left: 15%;
+}

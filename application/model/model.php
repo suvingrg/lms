@@ -301,4 +301,9 @@ class Model
       return $query->fetchAll();
     }
 
+    public function logout($session_usrname)
+    {
+      session_destroy($_SESSION[$session_usrname]);
+    }
+
 }

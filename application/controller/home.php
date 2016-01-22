@@ -19,9 +19,11 @@ class Home extends Controller
         $logtype = $this->model->loginVerify($_POST["usrname"], $_POST["pwd"]);
         if (isset($logtype)) {
           if ($logtype == 'counsellor') {
+            $_SESSION['usrname'] = "Counsellor";
             header('location: ' . URL . 'leads/index');
           }
           else {
+            $_SESSION['usrname'] = "Top Management";
             header('location: ' . URL . 'top/index');
           }
         // $_SESSION['id'] =
@@ -31,6 +33,14 @@ class Home extends Controller
         }
       }
 
+    }
+
+    public function logout()
+    {
+      if (isset($_POST['logout'])) {
+        $this->model->logout($_SESSION['usrname']);
+      }
+      header('location: ' . URL . 'home/index');
     }
 
 }
